@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638773732887605021
-    m_Hash: 2057470704
+      ticks: 638785835966393233
+    m_Hash: 3721577148
   m_LockFileStatus:
     m_FilePath: C:/PJ_Practica1/Practica1/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638773734153978159
-    m_Hash: 3686270037
+      ticks: 638785835966393233
+    m_Hash: 2481302742
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -640,9 +640,11 @@ m_ResolvedPackages:
     - 1.12.0
     - 1.13.0
     - 1.13.1
+    - 1.14.0
     compatible:
     - 1.13.0
     - 1.13.1
+    - 1.14.0
     recommended: 1.13.1
     deprecated: []
   dependencies:
