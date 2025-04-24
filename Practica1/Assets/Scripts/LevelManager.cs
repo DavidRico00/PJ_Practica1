@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public void BotonEntrenamiento()
+    public void BotonNuevaPartida()
     {
         SceneManager.LoadScene(1);
     }
