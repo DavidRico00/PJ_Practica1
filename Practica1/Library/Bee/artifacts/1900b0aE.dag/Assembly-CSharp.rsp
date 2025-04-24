@@ -442,6 +442,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/CameraScript.cs"
 "Assets/Scripts/LevelManager.cs"
+"Assets/Scripts/OpcionesScript.cs"
 "Assets/Scripts/PlayerScript.cs"
 -langversion:9.0
 /deterministic
