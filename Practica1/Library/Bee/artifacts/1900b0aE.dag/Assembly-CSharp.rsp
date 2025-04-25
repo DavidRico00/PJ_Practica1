@@ -129,6 +129,7 @@
 -define:TEXTCORE_TEXT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Managed/UnityEngine/UnityEditor.AccessibilityModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Managed/UnityEngine/UnityEditor.AdaptivePerformanceModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Managed/UnityEngine/UnityEditor.BuildProfileModule.dll"
@@ -371,6 +372,9 @@
 -r:"Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd/net40/unity-custom/nunit.framework.dll"
 -r:"Library/PackageCache/com.unity.nuget.mono-cecil@d6f9955a5d5f/Mono.Cecil.dll"
 -r:"Library/PackageCache/com.unity.visualscripting@1b53f46e931b/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/AstarPathfindingProject.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/AstarPathfindingProjectEditor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/PackageToolsEditor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PPv2URPConverters.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PsdPlugin.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Animation.Editor.ref.dll"
@@ -441,6 +445,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/6000.0.40f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
 "Assets/Scripts/CameraScript.cs"
+"Assets/Scripts/Enemigo.cs"
 "Assets/Scripts/LevelManager.cs"
 "Assets/Scripts/OpcionesScript.cs"
 "Assets/Scripts/PlayerScript.cs"
