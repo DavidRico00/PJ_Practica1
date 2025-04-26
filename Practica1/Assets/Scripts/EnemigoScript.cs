@@ -114,6 +114,7 @@ public class EnemigoScript : MonoBehaviour
         vidas -= dano;
         if (vidas <= 0)
         {
+            playerGO.GetComponent<PlayerScript>().SumarPuntos(100);
             DesactivateAI();
             maxActiveDistance = 0f;
             animator.SetBool("dead", true);

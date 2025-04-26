@@ -11,11 +11,19 @@ public class PlayerScript : MonoBehaviour
     private Animator animator;
     private bool atacando = false;
     public LayerMask enemyLayer;
-    
+
+    private int score = 0;  
+
+    private ControladorGlobalPuntación controladorGlobalPuntación;
+
+    private string nombre = "Jugador_1";
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        controladorGlobalPuntación = GetComponent<ControladorGlobalPuntación>();
+
     }
 
     void Update()
@@ -114,18 +122,32 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public int vidas = 5;
+    public int vidas = 2;
 
     public void RecibirGolpe(int dano)
     {
         vidas -= dano;
+        score -= 20;
         if (vidas <= 0)
         {
+            score -= 50;
+            Guardar();
+
             animator.SetBool("dead", true);
         }
 
         Debug.Log("Recibido daño: " + dano + " | Vidas restantes: " + vidas);
     }
 
+    public void SumarPuntos(int puntos)
+    {
+        score += puntos;
+        Debug.Log("Puntos totales: " + score);
+    }
 
+    public void Guardar()
+    {
+        Debug.Log("Guardando datos del jugador: " + nombre + " con " + score + " puntos.");
+        controladorGlobalPuntación.AddPlayerRecord(nombre, score); 
+    }
 }
