@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -67,6 +68,10 @@ public class PlayerScript : MonoBehaviour
         animator.SetInteger("walking", 0);
     }
 
+
+    // Definir el tamaño de la caja (puedes ajustar esto a lo que quieras)
+    private Vector2 boxSize = new Vector2(0.32f, 0.32f); // ancho y alto de la zona de golpeo
+        
     void LanzarRaycast(int direccion)
     {
         Vector2 direction = Vector2.zero;
@@ -74,22 +79,53 @@ public class PlayerScript : MonoBehaviour
         switch (direccion)
         {
             case 12: direction = Vector2.up; break;
-            case 6: direction =  Vector2.down; break;
-            case 3: direction =  Vector2.right; break;
-            case 9: direction =  Vector2.left; break;
+            case 6: direction = Vector2.down; break;
+            case 3: direction = Vector2.right; break;
+            case 9: direction = Vector2.left; break;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, attackRange, enemyLayer);
+        Vector2 boxCenter = (Vector2)transform.position + direction * (attackRange / 2);
 
-        if (hit.collider != null)
+        Collider2D hit = Physics2D.OverlapBox(boxCenter, boxSize, 0f, enemyLayer);
+
+        if (hit != null)
         {
-            Debug.Log("Enemigo golpeado: " + hit.collider.name);
+            GameObject enemigoGolpeado = hit.gameObject;
+            enemigoGolpeado.GetComponent<EnemigoScript>().RecibirGolpe(1);
+
+            Debug.Log("¡Enemigo golpeado en área! Objeto: " + enemigoGolpeado);
         }
         else
         {
-            Debug.Log("No hay enemigo en el rango de ataque.");
+            Debug.Log("No hay enemigo en el área de ataque.");
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Vector2 direction = Vector2.zero;
+            // Aquí deberías guardar la última dirección usada si quieres mostrarlo en tiempo real
+            direction = Vector2.up; // Por ejemplo, hacia arriba
+            Vector2 boxCenter = (Vector2)transform.position + direction * (attackRange / 2);
+            Gizmos.DrawWireCube(boxCenter, boxSize);
+        }
+    }
+
+    public int vidas = 5;
+
+    public void RecibirGolpe(int dano)
+    {
+        vidas -= dano;
+        if (vidas <= 0)
+        {
+            animator.SetBool("dead", true);
         }
 
-        
+        Debug.Log("Recibido daño: " + dano + " | Vidas restantes: " + vidas);
     }
+
+
 }
