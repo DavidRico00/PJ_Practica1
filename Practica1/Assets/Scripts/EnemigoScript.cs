@@ -24,11 +24,18 @@ public class EnemigoScript : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
+        BuscarEnemigo();
+
         InvokeRepeating("CheckIfStuck", stuckCheckInterval, stuckCheckInterval);
     }
 
     void Update()
     {
+        if (player == null)
+        {
+            BuscarEnemigo();
+        }
+
         if (aiPath.velocity.magnitude > 0f)   animator.SetBool("move", true);
         else                                  animator.SetBool("move", false);
 
@@ -139,5 +146,14 @@ public class EnemigoScript : MonoBehaviour
         isAttacking = false;
     }
 
+    private void BuscarEnemigo()
+    {
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        if (playerGO != null)
+        {
+            player = playerGO.transform;
+            destinationSetter.target = player;
+        }
+    }
 }
 

@@ -451,6 +451,7 @@
 "Assets/Scripts/LevelManager.cs"
 "Assets/Scripts/OpcionesScript.cs"
 "Assets/Scripts/PlayerScript.cs"
+"Assets/Scripts/Transformacion_Mapa.cs"
 -langversion:9.0
 /deterministic
 /optimize+

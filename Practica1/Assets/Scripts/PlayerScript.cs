@@ -150,4 +150,10 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Guardando datos del jugador: " + nombre + " con " + score + " puntos.");
         controladorGlobalPuntación.AddPlayerRecord(nombre, score); 
     }
+
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 }
