@@ -17,4 +17,14 @@ public class LevelManager : MonoBehaviour
         #endif
     }
 
+    public void BotonVolverMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void PantallaFinal()
+    {
+        SceneManager.LoadScene(3);
+    }
+
 }

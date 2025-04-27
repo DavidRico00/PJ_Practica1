@@ -5,7 +5,7 @@ public class EnemigoScript : MonoBehaviour
 {
     public GameObject playerGO;
     public Transform player;
-    public float stuckCheckInterval = 0.5f, movementThreshold = 0.01f, stuckTimeLimit = 2f, playerDistanceTrigger = 2f;
+    private float stuckCheckInterval = 0.5f, movementThreshold = 0.01f, stuckTimeLimit = 2f, playerDistanceTrigger = 2f;
     public float maxActiveDistance, attackRange = 0.1f;
     private Vector2 lastPosition;
     private float stuckTimer = 0f;
@@ -122,6 +122,7 @@ public class EnemigoScript : MonoBehaviour
         if (vidas <= 0)
         {
             playerGO.GetComponent<PlayerScript>().SumarPuntos(100);
+            playerGO.GetComponent<PlayerScript>().CambiarPared();
             DesactivateAI();
             maxActiveDistance = 0f;
             animator.SetBool("dead", true);
@@ -143,6 +144,11 @@ public class EnemigoScript : MonoBehaviour
     public void TerminarAtaque()
     {
         animator.SetBool("attack", false);
+        Invoke("ResetAttack", 0.5f);
+    }
+
+    void ResetAttack()
+    {
         isAttacking = false;
     }
 
@@ -155,5 +161,7 @@ public class EnemigoScript : MonoBehaviour
             destinationSetter.target = player;
         }
     }
+
+
 }
 

@@ -1,5 +1,6 @@
 using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -71,14 +72,17 @@ public class PlayerScript : MonoBehaviour
 
     void NoAttack()
     {
-        atacando = false;
         animator.SetInteger("attack", 0);
         animator.SetInteger("walking", 0);
+        Invoke("ResetAttack", 0.2f);
     }
 
+    void ResetAttack()
+    {
+        atacando = false;
+    }
 
-    // Definir el tamaño de la caja (puedes ajustar esto a lo que quieras)
-    private Vector2 boxSize = new Vector2(0.32f, 0.32f); // ancho y alto de la zona de golpeo
+    private Vector2 boxSize = new Vector2(0.48f, 0.48f);
         
     void LanzarRaycast(int direccion)
     {
@@ -122,7 +126,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public int vidas = 2;
+    public int vidas;
 
     public void RecibirGolpe(int dano)
     {
@@ -134,9 +138,14 @@ public class PlayerScript : MonoBehaviour
             Guardar();
 
             animator.SetBool("dead", true);
+            Invoke("SetDeadFalse", 0.1f);
         }
-
         Debug.Log("Recibido daño: " + dano + " | Vidas restantes: " + vidas);
+    }
+
+    void SetDeadFalse()
+    {
+        animator.SetBool("dead", false);
     }
 
     public void SumarPuntos(int puntos)
@@ -151,9 +160,25 @@ public class PlayerScript : MonoBehaviour
         controladorGlobalPuntación.AddPlayerRecord(nombre, score); 
     }
 
-
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public int numEnemigos;
+    public GameObject paredSP, paredCP;
+    public void CambiarPared()
+    {
+        numEnemigos--;
+        if (numEnemigos == 0)
+        {
+            paredSP.SetActive(true);
+            paredCP.SetActive(false);
+        }
+    }
+
+    public void CambiarEscena()
+    {
+        SceneManager.LoadScene(3);
     }
 }

@@ -8,11 +8,18 @@ public class OpcionesScritp : MonoBehaviour
  
     void Start()
     {
-        sliderMusica.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
-        AudioListener.volume = sliderMusica.value;
+        if(sliderMusica != null)
+        {
+            sliderMusica.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
+            AudioListener.volume = sliderMusica.value;
+        }
+        
+        float valor = PlayerPrefs.GetFloat("brillo", 0.5f);
 
-        sliderBrillo.value = PlayerPrefs.GetFloat("brillo", 0.5f);
-        panelBrillo.color = new Color(panelBrillo.color.r, panelBrillo.color.g, panelBrillo.color.b, sliderBrillo.value);
+        if(sliderBrillo != null)
+            sliderBrillo.value = valor;
+
+        panelBrillo.color = new Color(panelBrillo.color.r, panelBrillo.color.g, panelBrillo.color.b, valor);
     }
 
     public void modificarSlider(float valor)
