@@ -134,10 +134,12 @@ public class EnemigoScript : MonoBehaviour
         Destroy(gameObject, 0f);
     }
 
+    public AudioClip sonidoAtaque;
     void Atacar()
     {
         isAttacking = true;
         animator.SetBool("attack", true);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoAtaque);
         playerGO.GetComponent<PlayerScript>().RecibirGolpe(1);
     }
 

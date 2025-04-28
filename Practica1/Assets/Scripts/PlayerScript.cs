@@ -62,11 +62,13 @@ public class PlayerScript : MonoBehaviour
             rb2D.linearVelocity = new Vector2(horizontal * Speed, vertical * Speed);
     }
 
+    public AudioClip sonidoAtaque;
     void Attack(int direccion)
     {
         Debug.Log("Atacando en direccion: " + direccion);
         atacando = true;
         animator.SetInteger("attack", direccion);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoAtaque);
         LanzarRaycast(direccion);
     }
 
@@ -167,11 +169,13 @@ public class PlayerScript : MonoBehaviour
 
     public int numEnemigos;
     public GameObject paredSP, paredCP;
+    public AudioClip sonidoPuerta;
     public void CambiarPared()
     {
         numEnemigos--;
         if (numEnemigos == 0)
         {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoPuerta);
             paredSP.SetActive(true);
             paredCP.SetActive(false);
         }
