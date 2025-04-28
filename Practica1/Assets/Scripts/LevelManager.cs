@@ -1,8 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager instance;
+    public Text puntuacion;
+    private int score = 0;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     public void BotonNuevaPartida()
     {
         SceneManager.LoadScene(1);
@@ -27,4 +41,9 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
+    public void modificarPuntuacion(int score)
+    {
+        this.score = score;
+        puntuacion.text = score.ToString();
+    }
 }

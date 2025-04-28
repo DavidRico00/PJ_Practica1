@@ -24,7 +24,6 @@ public class PlayerScript : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         controladorGlobalPuntación = GetComponent<ControladorGlobalPuntación>();
-
     }
 
     void Update()
@@ -84,7 +83,7 @@ public class PlayerScript : MonoBehaviour
         atacando = false;
     }
 
-    private Vector2 boxSize = new Vector2(0.48f, 0.48f);
+    private Vector2 boxSize = new Vector2(0.60f, 0.60f);
         
     void LanzarRaycast(int direccion)
     {
@@ -134,14 +133,20 @@ public class PlayerScript : MonoBehaviour
     {
         vidas -= dano;
         score -= 20;
+        
+        LevelManager lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+        lm.modificarPuntuacion(score);
+
         if (vidas <= 0)
         {
             score -= 50;
+            lm.modificarPuntuacion(score);
             Guardar();
-
             animator.SetBool("dead", true);
             Invoke("SetDeadFalse", 0.1f);
         }
+        
+
         Debug.Log("Recibido daño: " + dano + " | Vidas restantes: " + vidas);
     }
 
@@ -154,6 +159,9 @@ public class PlayerScript : MonoBehaviour
     {
         score += puntos;
         Debug.Log("Puntos totales: " + score);
+
+        LevelManager lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+        lm.modificarPuntuacion(score);
     }
 
     public void Guardar()
@@ -167,18 +175,34 @@ public class PlayerScript : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public int numEnemigos;
+    private int numEnemigos = 0;
     public GameObject paredSP, paredCP;
     public AudioClip sonidoPuerta;
+
+    public void SumarEnemigo()
+    {
+        numEnemigos++;
+    }
+
+    private bool isPared = true;
     public void CambiarPared()
     {
         numEnemigos--;
-        if (numEnemigos == 0)
+        if (numEnemigos == 0 && isPared)
         {
+            Debug.Log("1 - Cambiando pared");
+            isPared = false;
             Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoPuerta);
             paredSP.SetActive(true);
             paredCP.SetActive(false);
         }
+        else if (numEnemigos == 0 && !isPared)
+        {
+            Debug.Log("2 - No hay enemigos restantes, procede a guardar.");
+            Guardar();
+        }
+
+        Debug.Log("Número de enemigos restantes: " + numEnemigos);
     }
 
     public void CambiarEscena()

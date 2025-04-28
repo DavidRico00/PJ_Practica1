@@ -14,11 +14,13 @@ public class Transformacion_Mapa : MonoBehaviour
         {
             puntoIni = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
             jugador.transform.position = puntoIni.position;
+
+            jugador.GetComponent<PlayerScript>().SumarPuntos(0);
             Debug.Log("Jugador movido al SpawnPoint al inicio.");
         }
         else
         {
-            Debug.Log("No se encontró el objeto Player al inicio.");
+            Debug.Log("No se encontrï¿½ el objeto Player al inicio.");
         }
     }
 

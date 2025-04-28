@@ -24,17 +24,26 @@ public class EnemigoScript : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        BuscarEnemigo();
+        if(playerGO == null || player == null)
+            buscarPlayer();
+
+        playerGO.GetComponent<PlayerScript>().SumarEnemigo();
 
         InvokeRepeating("CheckIfStuck", stuckCheckInterval, stuckCheckInterval);
     }
 
+    void buscarPlayer()
+    {
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+        if (playerGO != null)
+        {
+            player = playerGO.transform;
+            destinationSetter.target = player;
+        }
+    }
+
     void Update()
     {
-        if (player == null)
-        {
-            BuscarEnemigo();
-        }
 
         if (aiPath.velocity.magnitude > 0f)   animator.SetBool("move", true);
         else                                  animator.SetBool("move", false);
@@ -114,14 +123,14 @@ public class EnemigoScript : MonoBehaviour
         destinationSetter.enabled = false;
     }
 
-    public int vidas = 2;
+    public int vidas, puntos;
     
     public void RecibirGolpe(int dano)
     {
         vidas -= dano;
         if (vidas <= 0)
         {
-            playerGO.GetComponent<PlayerScript>().SumarPuntos(100);
+            playerGO.GetComponent<PlayerScript>().SumarPuntos(puntos);
             playerGO.GetComponent<PlayerScript>().CambiarPared();
             DesactivateAI();
             maxActiveDistance = 0f;
@@ -152,16 +161,6 @@ public class EnemigoScript : MonoBehaviour
     void ResetAttack()
     {
         isAttacking = false;
-    }
-
-    private void BuscarEnemigo()
-    {
-        playerGO = GameObject.FindGameObjectWithTag("Player");
-        if (playerGO != null)
-        {
-            player = playerGO.transform;
-            destinationSetter.target = player;
-        }
     }
 
 
