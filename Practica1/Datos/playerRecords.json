@@ -1,52 +1,27 @@
 [
   {
-    "playerName": "Jugador_1",
-    "score": 940,
-    "date": "2025-04-28 22:55:40"
-  },
-  {
-    "playerName": "Jugador_1",
+    "playerName": "Wada",
     "score": 860,
-    "date": "2025-04-28 23:05:28"
+    "date": null
   },
   {
-    "playerName": "Jugador_1",
-    "score": 780,
-    "date": "2025-04-28 23:00:49"
+    "playerName": "AAA",
+    "score": 860,
+    "date": null
   },
   {
-    "playerName": "Jugador_1",
-    "score": 660,
-    "date": "2025-04-28 22:57:56"
+    "playerName": "David",
+    "score": 110,
+    "date": null
   },
   {
-    "playerName": "Jugador_1",
-    "score": 380,
-    "date": "2025-04-28 22:55:08"
+    "playerName": "",
+    "score": -70,
+    "date": null
   },
   {
-    "playerName": "Jugador_1",
-    "score": 380,
-    "date": "2025-04-28 22:57:45"
-  },
-  {
-    "playerName": "Jugador_1",
-    "score": 300,
-    "date": "2025-04-28 23:00:13"
-  },
-  {
-    "playerName": "Jugador_1",
-    "score": -50,
-    "date": "2025-04-27 21:43:30"
-  },
-  {
-    "playerName": "Jugador_1",
-    "score": -110,
-    "date": "2025-04-26 19:35:29"
-  },
-  {
-    "playerName": "Jugador_1",
-    "score": -110,
-    "date": "2025-04-27 19:02:33"
+    "playerName": "David",
+    "score": -250,
+    "date": null
   }
 ]

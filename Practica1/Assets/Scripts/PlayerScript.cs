@@ -16,14 +16,19 @@ public class PlayerScript : MonoBehaviour
     private int score = 0;  
 
     private ControladorGlobalPuntación controladorGlobalPuntación;
+    private LevelManager lm;
 
-    private string nombre = "Jugador_1";
+
+    private string nombre;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         controladorGlobalPuntación = GetComponent<ControladorGlobalPuntación>();
+
+        lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+        lm.modificarVida(vidas);
     }
 
     void Update()
@@ -133,21 +138,22 @@ public class PlayerScript : MonoBehaviour
     {
         vidas -= dano;
         score -= 20;
-        
-        LevelManager lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+
+        if(lm == null)
+            lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+
         lm.modificarPuntuacion(score);
+        lm.modificarVida(vidas);
 
         if (vidas <= 0)
         {
             score -= 50;
             lm.modificarPuntuacion(score);
-            Guardar();
             animator.SetBool("dead", true);
             Invoke("SetDeadFalse", 0.1f);
+            
+            Guardar();
         }
-        
-
-        Debug.Log("Recibido daño: " + dano + " | Vidas restantes: " + vidas);
     }
 
     void SetDeadFalse()
@@ -158,15 +164,16 @@ public class PlayerScript : MonoBehaviour
     public void SumarPuntos(int puntos)
     {
         score += puntos;
-        Debug.Log("Puntos totales: " + score);
 
-        LevelManager lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+        if(lm == null)
+            lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+
         lm.modificarPuntuacion(score);
     }
 
     public void Guardar()
     {
-        Debug.Log("Guardando datos del jugador: " + nombre + " con " + score + " puntos.");
+        nombre = controladorGlobalPuntación.getNombreJugador();
         controladorGlobalPuntación.AddPlayerRecord(nombre, score); 
     }
 
@@ -190,7 +197,6 @@ public class PlayerScript : MonoBehaviour
         numEnemigos--;
         if (numEnemigos == 0 && isPared)
         {
-            Debug.Log("1 - Cambiando pared");
             isPared = false;
             Camera.main.GetComponent<AudioSource>().PlayOneShot(sonidoPuerta);
             paredSP.SetActive(true);
@@ -198,15 +204,21 @@ public class PlayerScript : MonoBehaviour
         }
         else if (numEnemigos == 0 && !isPared)
         {
-            Debug.Log("2 - No hay enemigos restantes, procede a guardar.");
             Guardar();
+            Invoke("CambiarEscena", 3f);
         }
-
-        Debug.Log("Número de enemigos restantes: " + numEnemigos);
     }
 
     public void CambiarEscena()
     {
         SceneManager.LoadScene(3);
+    }
+
+    private void modificarVida()
+    {
+        if(lm == null)
+            lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();
+
+        lm.modificarVida(vidas);
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    public Text puntuacion;
-    private int score = 0;
+    public Text puntuacion, vida;
+    private int score = 0, numVidas;
 
     private void Awake()
     {
@@ -45,5 +45,11 @@ public class LevelManager : MonoBehaviour
     {
         this.score = score;
         puntuacion.text = score.ToString();
+    }
+
+    public void modificarVida(int v)
+    {
+        this.numVidas = v;
+        vida.text = numVidas.ToString();
     }
 }

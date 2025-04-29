@@ -19,7 +19,7 @@ public class ControladorGlobalPuntación : MonoBehaviour
 
     private List<PlayerRecord> allRecords; // Lista de registros de jugadores
 
-    public Text puntuacion;
+    public Text puntuacion, nombreJugador;
 
     void Start()
     {
@@ -31,11 +31,10 @@ public class ControladorGlobalPuntación : MonoBehaviour
         if(puntuacion != null)
         {
             string texto = $"{"#", -6} {"Nombre",-15} {"Puntos",7}\n";
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < allRecords.Count; i++)
             {
                 texto += $"{i + 1,-6} {allRecords[i].playerName, -15} {allRecords[i].score,7}\n";
             }
-
             
             puntuacion.text = texto;
         }
@@ -46,7 +45,6 @@ public class ControladorGlobalPuntación : MonoBehaviour
         PlayerRecord newRecord = new PlayerRecord();
         newRecord.playerName = playerName;
         newRecord.score = score;
-        newRecord.date = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         if(allRecords.Count < 10) allRecords.Add(newRecord);
         else
@@ -83,7 +81,7 @@ public class ControladorGlobalPuntación : MonoBehaviour
         }
         else
         {
-            allRecords = new List<PlayerRecord>(); // Inicia la lista vacía si no existe el archivo
+            allRecords = new List<PlayerRecord>();
         }
     }
 
@@ -91,6 +89,32 @@ public class ControladorGlobalPuntación : MonoBehaviour
     {
             string json = JsonConvert.SerializeObject(allRecords, Formatting.Indented);
             File.WriteAllText(filePath, json);
+    }
+
+     public void GuardarNombre()
+    {
+        string rutaDirectorio = Path.Combine(Directory.GetParent(Application.dataPath).ToString(), "Datos");
+        string rutaArchivo = Path.Combine(rutaDirectorio, "nombre.txt");
+
+        if(nombreJugador.text == "" || nombreJugador.text == null)
+        {
+            File.WriteAllText(rutaArchivo, "Jugador");
+        }
+        else
+        {
+            File.WriteAllText(rutaArchivo, nombreJugador.text);
+        }
+    }
+
+    public string getNombreJugador()
+    {
+        string rutaDirectorio = Path.Combine(Directory.GetParent(Application.dataPath).ToString(), "Datos");
+        string rutaArchivo = Path.Combine(rutaDirectorio, "nombre.txt");
+
+        if (File.Exists(rutaArchivo))
+            return File.ReadAllText(rutaArchivo);
+        else
+            return "Jugador";
     }
 
 }
