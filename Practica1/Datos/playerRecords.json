@@ -1,5 +1,10 @@
 [
   {
+    "playerName": "Prueba",
+    "score": 880,
+    "date": null
+  },
+  {
     "playerName": "Wada",
     "score": 860,
     "date": null
@@ -21,6 +26,11 @@
   },
   {
     "playerName": "David",
+    "score": -250,
+    "date": null
+  },
+  {
+    "playerName": "Prueba2",
     "score": -250,
     "date": null
   }

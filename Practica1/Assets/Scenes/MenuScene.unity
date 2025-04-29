@@ -3499,6 +3499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntuacion: {fileID: 0}
+  vida: {fileID: 0}
 --- !u!4 &1582174701
 Transform:
   m_ObjectHideFlags: 0
@@ -5198,9 +5199,9 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 485475593}
   - {fileID: 8628818}
   - {fileID: 1856110601}
   - {fileID: 1582174701}
+  - {fileID: 519420032}

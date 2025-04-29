@@ -214,7 +214,7 @@ public class PlayerScript : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
-    private void modificarVida()
+    public void modificarVida()
     {
         if(lm == null)
             lm = GameObject.FindGameObjectWithTag("HUD").GetComponent<LevelManager>();

@@ -15,8 +15,10 @@ public class Transformacion_Mapa : MonoBehaviour
             puntoIni = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
             jugador.transform.position = puntoIni.position;
 
-            jugador.GetComponent<PlayerScript>().SumarPuntos(0);
             Debug.Log("Jugador movido al SpawnPoint al inicio.");
+
+            jugador.GetComponent<PlayerScript>().SumarPuntos(0);
+            jugador.GetComponent<PlayerScript>().modificarVida();
         }
         else
         {
