@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PlayerRecord
@@ -18,12 +19,26 @@ public class ControladorGlobalPuntación : MonoBehaviour
 
     private List<PlayerRecord> allRecords; // Lista de registros de jugadores
 
+    public Text puntuacion;
+
     void Start()
     {
 
         filePath = Directory.GetParent(Application.dataPath).ToString() + "/Datos/playerRecords.json"; 
         
-        LoadRecords(); 
+        LoadRecords();
+
+        if(puntuacion != null)
+        {
+            string texto = $"{"#", -6} {"Nombre",-15} {"Puntos",7}\n";
+            for (int i = 0; i < 10; i++)
+            {
+                texto += $"{i + 1,-6} {allRecords[i].playerName, -15} {allRecords[i].score,7}\n";
+            }
+
+            
+            puntuacion.text = texto;
+        }
     }
 
     public void AddPlayerRecord(string playerName, int score)
